@@ -11,7 +11,15 @@ go run github.com/99designs/gqlgen init
 ```
 
 ## download mysql driver
+
 download migrate from https://github.com/golang-migrate/migrate/releases
+
+```shell
+go get -u github.com/go-sql-driver/mysql
+cd internal/pkg/db/migrations/sql
+migrate create -ext sql -dir mysql -seq create_users_table
+migrate create -ext sql -dir mysql -seq create_links_table
+```
 
 auto create tables from sql files
 ```shell
@@ -22,7 +30,15 @@ auto create tables from sql files
 
 ## interface to be implement in file: graph/schema.resolvers.go
 
+Now run the following command to regenerate files;
+```shell
+go run github.com/99designs/gqlgen generate
+```
+
 ## server runnning
+```shell
+go run server.go
+```
 
 post http://localhost:8080/query  with http header Authorization
 
